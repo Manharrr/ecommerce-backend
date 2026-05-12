@@ -4,6 +4,7 @@ from .models import CartItem
 
 class CartItemSerializer(serializers.ModelSerializer):
     product_name = serializers.ReadOnlyField(source='perfume.name')
+    product_brand = serializers.ReadOnlyField(source='perfume.brand.name')
     product_price = serializers.ReadOnlyField(source='perfume.price')
     product_image = serializers.ImageField(source='perfume.image', read_only=True)
     stock = serializers.ReadOnlyField(source='perfume.stock')
@@ -12,7 +13,7 @@ class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = [
-            'id','perfume','product_name','product_price','product_image','quantity','stock','subtotal'
+            'id','perfume','product_name','product_brand','product_price','product_image','quantity','stock','subtotal'
         ]
 
     def get_subtotal(self, obj):
